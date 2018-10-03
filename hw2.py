@@ -6,6 +6,7 @@ Created on Tue Oct  2 17:39:04 2018
 """
 
 import pandas as pd
+import random
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -102,6 +103,29 @@ print(dupRate)
 
 #corrTic = combine['Ticket'].corr(combine['Survived'])
 
+#Q15
 print("")
 cabinNull = combine.Cabin.isnull().sum()
 print("Cabin NULL Count:", cabinNull)
+
+#Q16
+combine['Gender'] = combine.Sex
+gender = {'male': 0, 'female': 1 }
+combine.Gender = [gender[item] for item in combine.Gender]
+
+#Q17
+combine['Age'] = combine.Age.apply(lambda x: x if not pd.isnull(x) else (random.uniform(combine.Age.mean(), combine.Age.std())))
+
+#Q18
+letter = combine.Embarked.value_counts().idxmax()
+combine['Embarked'] = combine.Embarked.apply(lambda y: y if not pd.isnull(y) else (letter))
+
+#Q19
+fare_mode = combine.Fare.mode().max()
+combine['Fare'] = combine.Fare.apply(lambda z: z if not pd.isnull(z) else (fare_mode))
+
+#Q20
+combine.loc[(combine['Fare'] > -0.001) & (combine['Fare'] <= 7.91), 'Fare'] = 0
+combine.loc[(combine['Fare'] > 7.91) & (combine['Fare'] <= 14.454), 'Fare'] = 1
+combine.loc[(combine['Fare'] > 14.454) & (combine['Fare'] <= 31.0), 'Fare'] = 2
+combine.loc[(combine['Fare'] > 31.0) & (combine['Fare'] <= 512.330), 'Fare'] = 3
