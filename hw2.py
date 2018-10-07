@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 """
-Created on Tue Oct  2 17:39:04 2018
-
-@author: Andrew
+Andrew Floyd
+CS3001 - Intro to Data Science
+HW #2 - Dr. Fu
+10/7/18
+SEE PHOTOS FOR OUTPUT FOR MANY OF THE COMMENTED LINES
 """
 
 import pandas as pd
